@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#a6aebc</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="transparentBGLogin">#66000000</color>
+    <color name="colorFB">#189aca</color>
+    <color name="colorTextRadioDefaultr">#000</color>
+    <color name="colorBlack">#B3000000</color>
+    <color name="bgHome">#CCC</color>
+    <color name="circle_score">#1da60a</color>
+    <color name="colortinnhan">#0f0f0f</color>
+    <color name="color_send">#705ee5</color>
+    <color name="color_text">#d5ddea</color>
+    <color name="color_mesageUser">#5693f7</color>
+    <color name="background_profile">#bfd7fc</color>
+    <color name="backgroud_groupadd">#4377cc</color>
+    <color name="background_all">#cfdef7</color>
+</resources>

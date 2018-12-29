@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "652198499502",
+    "firebase_url": "https://chattok-bfc23.firebaseio.com",
+    "project_id": "chattok-bfc23",
+    "storage_bucket": "chattok-bfc23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652198499502:android:c5078e6c38f20646",
+        "android_client_info": {
+          "package_name": "com.example.ngothihuyen.chattok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652198499502-0ln435sn4a7r6ste86ipgr1eqollota5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ngothihuyen.chattok",
+            "certificate_hash": "1587b20bf81a9f80aa9bd5a45181db61210f7b12"
+          }
+        },
+        {
+          "client_id": "652198499502-8e6ndlaft0a6pmm95d11edo7tpr7n4fl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD49VmiMgeB3Ea_ko9VMfhbSHzJz9iMgFs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652198499502-8e6ndlaft0a6pmm95d11edo7tpr7n4fl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

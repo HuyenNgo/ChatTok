@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">chattok</string>
+    <string name="recentChat">Messages</string>
+    <string name="contact">Contact</string>
+    <string name="Team">Team</string>
+    <string name="Profile">Profile</string>
+    <string name="ReplaceProfile">Thay đổi ảnh đại diện</string>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bgHome">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:minHeight="?android:attr/actionBarSize">
+
+        <RadioGroup
+            android:id="@+id/group_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:background="@drawable/custom_toolbar_radiogroup"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rdMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_toolbar_button_left"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:padding="@dimen/padding_default"
+                android:text="@string/recentChat"
+                android:textAlignment="center"
+                android:textColor="@drawable/custom_toolbar_textcolor" />
+
+            <RadioButton
+                android:id="@+id/rdContact"
+                android:layout_width="97dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_toolbar_button_right"
+                android:button="@android:color/transparent"
+                android:padding="@dimen/padding_default"
+                android:text="@string/contact"
+                android:textAlignment="center"
+                android:textColor="@drawable/custom_toolbar_textcolor" />
+
+            <RadioButton
+                android:id="@+id/rdTeam"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_toolbar_button_right"
+                android:button="@android:color/transparent"
+                android:padding="@dimen/padding_default"
+                android:text="@string/Team"
+                android:textAlignment="center"
+                android:textColor="@drawable/custom_toolbar_textcolor" />
+
+        </RadioGroup>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_launcher"
+           android:padding="8dp"
+            android:id="@+id/imageUser"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>
