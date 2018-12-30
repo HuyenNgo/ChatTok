@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ngothihuyen.chattok.View.FlagmentMain;
@@ -21,7 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
-    private Button btSignin;
+    private TextView tvSignIn;
     private Button btLogin;
     private EditText editmail;
     private EditText editpass;
@@ -45,16 +46,17 @@ public class Login extends AppCompatActivity {
 
         editmail = (EditText) findViewById(R.id.mail);
         editpass = (EditText) findViewById(R.id.password);
-        btSignin = (Button) findViewById(R.id.bt_signin);
+        tvSignIn = (TextView) findViewById(R.id.tvNewSignUp);
         btLogin = (Button) findViewById(R.id.btlogin);
 
         //Xử lý sự kiện sign-in
-        btSignin.setOnClickListener(new View.OnClickListener() {
+
+        tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, sign_in.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 

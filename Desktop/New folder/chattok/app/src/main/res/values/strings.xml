@@ -1,8 +1,19 @@
 <resources>
     <string name="app_name">chattok</string>
-    <string name="recentChat">Messages</string>
-    <string name="contact">Contact</string>
-    <string name="Team">Team</string>
-    <string name="Profile">Profile</string>
+    <string name="recentChat">Tin nhắn</string>
+    <string name="contact">Bạn bè</string>
+    <string name="Team">Nhóm</string>
+    <string name="Profile">Tôi</string>
     <string name="ReplaceProfile">Thay đổi ảnh đại diện</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="loginback"><u>Đăng Nhập</u></string>
+    <string name="or">Hoặc</string>
+    <string name="LoginFB">Đăng nhập bằng Facebook</string>
+    <string name="LoginGG">Đăng nhập bằng Google</string>
+    <string name="forgetpwd">Quên mật khẩu?</string>
+    <string name="newsignup"><u>Đăng ký mới</u></string>
+    <string name="assignlogin">Bạn đã có tài khoản? </string>
+    <string name="displayname">Tên hiển thị</string>
+    <string name="signup">Đăng Ký</string>
 </resources>

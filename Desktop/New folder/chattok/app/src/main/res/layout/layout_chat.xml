@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/input"
             emojicon:emojiconUseSystemDefault="true"
-            android:hint="Enter your message"
+            android:hint="Nhập tin nhắn"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="40dp"
             android:textColor="#000000"

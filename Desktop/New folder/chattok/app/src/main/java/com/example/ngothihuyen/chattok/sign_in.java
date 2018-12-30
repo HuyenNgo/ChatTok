@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ValueEventListener;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 public  class sign_in extends AppCompatActivity  {
@@ -35,8 +36,9 @@ public  class sign_in extends AppCompatActivity  {
     private EditText editMail;
     private EditText editPass;
     private Button   btSignin;
-    private Button   btLogin;
+    private TextView btLogin;
     private String userID;
+    private  FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public  class sign_in extends AppCompatActivity  {
         editName=(EditText)findViewById(R.id.displayname_id);
         editPass=(EditText)findViewById(R.id.password_id);
         btSignin=(Button)findViewById(R.id.signin_id);
-        btLogin=(Button)findViewById(R.id.login_id);
+        btLogin=(TextView) findViewById(R.id.login_id);
 
         btSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,17 +74,12 @@ public  class sign_in extends AppCompatActivity  {
     private void moveLogin() {
         Intent intent=new Intent(sign_in.this,Login.class);
         startActivity(intent);
-        finish();
 
     }
 
     //Them User vao realtime Database
     private void createInforUser(String UserID,String displayName,String Email) {
         User User=new User(displayName,Email);
-
-
-
-      //  User.setIduser(iduser);
         Toast toast=Toast.makeText(sign_in.this,UserID,   Toast.LENGTH_SHORT);
         toast.show();
         mDatabase.child(UserID).setValue(User);
@@ -145,9 +142,13 @@ public  class sign_in extends AppCompatActivity  {
                 if(task.isSuccessful())
                 {
                     userID=FirebaseAuth.getInstance().getCurrentUser().getUid();
+
                     Toast toast=Toast.makeText(sign_in.this,"Đăng ký thành công",Toast.LENGTH_SHORT);
                     toast.show();
                    createInforUser(userID,name,Email);
+                    Intent intent=new Intent(sign_in.this,HomeActivity.class);
+                    startActivity(intent);
+                    finish();
 
 
                 }

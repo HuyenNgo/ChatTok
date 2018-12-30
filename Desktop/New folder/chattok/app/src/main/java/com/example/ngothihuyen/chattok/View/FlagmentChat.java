@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -89,6 +90,8 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getBaseContext());
         linearLayoutManager.setStackFromEnd(true);
         listMessage.setLayoutManager(linearLayoutManager);
+        listMessage.setItemAnimator(new DefaultItemAnimator());
+
         btSend=(ImageButton) findViewById(R.id.bt_send);
         edtInput=(EmojiconEditText) findViewById(R.id.input);
         nameUser=(TextView)findViewById(R.id.name_user);
@@ -126,13 +129,14 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
                 SendImage();
             }
         });
-       Bundle b = getIntent().getExtras();
+
+
+        Bundle b = getIntent().getExtras();
         MyParcelable obj = (MyParcelable) b. getParcelable("Conversation");
         ConverID=obj.getmData().toString();
-        Log.d("conver",ConverID.toString());
-         MyParcelable obj2=(MyParcelable)b.getParcelable("User_ID");
-         nameUserSend=obj2.getmData().toString();
-         nameUser.setText(nameUserSend);
+        MyParcelable obj2=(MyParcelable)b.getParcelable("User_ID");
+        nameUserSend=obj2.getmData().toString();
+        nameUser.setText(nameUserSend);
 
 
          DisplayMessage();
@@ -174,6 +178,7 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
             }
             else {
                 uploadImage();
+                DisplayMessage();
 
             }
         }
@@ -182,9 +187,9 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
     private  void uploadImage()
     {
 
-       /* final ProgressDialog pd=new ProgressDialog(FlagmentChat.class);
+        final ProgressDialog pd=new ProgressDialog(FlagmentChat.this);
         pd.setMessage("Uploading!");
-        pd.show();*/
+        pd.show();
 
         if (imageUri!=null)
         {
@@ -206,23 +211,23 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful())
                     {
+                        pd.dismiss();
                         Uri downloadUri=task.getResult();
                         String mUri=downloadUri.toString();
                         createMessageImage(mUri,Auth.getCurrentUser().getUid().toString());
-                       // pd.dismiss();
-                        finish();
+
                     }
                     else
                     {
                         Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
-                       // pd.dismiss();
+                        pd.dismiss();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                  //  pd.dismiss();
+                   pd.dismiss();
                 }
             });
         }
@@ -264,7 +269,7 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
              adapter.notifyItemInserted(listItems.size()-1);
              listMessage.scrollToPosition(listItems.size()-1);
              listItems.clear();
-           chatPresenter.getMessage(this);
+             chatPresenter.getMessage(this);
 
 
        }

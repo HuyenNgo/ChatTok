@@ -35,14 +35,9 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.ViewHold
     public static  final  int MS_LEFT=1;
     private Context context;
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-    private  DataSnapshot dataSnapshot;
     private DatabaseReference data;
     private FirebaseAuth Auth=FirebaseAuth.getInstance();
-    private  int resource;
     private List<Message> arrMessage;
-    private  String ConverID;
-    private FirebaseDatabase firebasedata2;
-    private  DatabaseReference data2;
     private int flag=0;
 
    public AdapterMessage(Context context,ArrayList<Message> arrMessage)
@@ -83,37 +78,39 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterMessage.ViewHolder viewHolder, int position) {
-                Message message=arrMessage.get(position);
 
-        data=firebaseDatabase.getReference("Users").child(message.getuser_id());
+       if(position < arrMessage.size()) {
+           Message message = arrMessage.get(position);
+           if (arrMessage.get(position).getType() == 0)
+               flag = 0;
+           else flag = 1;
+           data = firebaseDatabase.getReference("Users").child(message.getuser_id());
 
-        data.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user=dataSnapshot.getValue(User.class);
-                if(user.getAvatar().equals("default"))
-                {
-                    viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
-                }
-                else
-                    Glide.with(context).load(user.getAvatar()).into(viewHolder.imageView);
-            }
+           data.addListenerForSingleValueEvent(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   User user = dataSnapshot.getValue(User.class);
+                   if (user.getAvatar().equals("default")) {
+                       viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
+                   } else
+                       Glide.with(context).load(user.getAvatar()).into(viewHolder.imageView);
+               }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+               @Override
+               public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+               }
+           });
 
-        if(flag==0)
-        {
-            viewHolder.tvContext.setText(message.getContext());
-        }
-        else {
-            Glide.with(context).load(message.getContext()).into(viewHolder.imageSent);
+           if (flag == 0) {
+               viewHolder.tvContext.setText(message.getContext());
+           }
+           else if (flag == 1) {
+               Glide.with(context).load(message.getContext()).into(viewHolder.imageSent);
 
-        }
-        //viewHolder.tvTime.setText(android.text.format.DateFormat.format("(HH:mm:ss))",message.getTime()));
+           }
+           //viewHolder.tvTime.setText(android.text.format.DateFormat.format("(HH:mm:ss))",message.getTime()));
+       }
     }
 
     @Override
@@ -138,18 +135,16 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.ViewHold
     }
     @Override
     public int getItemViewType(int position) {
+        if( arrMessage.get(position).getType()==0)
+            flag=0;
+        else flag=1;
 
         if (arrMessage.get(position).getuser_id().compareTo(Auth.getCurrentUser().getUid()) == 0 ) {
-            if( arrMessage.get(position).getType()==0)
-                flag=0;
-            else flag=1;
+
             return MS_RIGHT;
         }
         else
         {
-            if( arrMessage.get(position).getType()==0)
-                flag=0;
-            else flag=1;
             return MS_LEFT;
         }
     }

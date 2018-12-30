@@ -71,18 +71,23 @@ public class AdapterConversation extends RecyclerView.Adapter<AdapterConversatio
         databaseReference.child(_conver.getlastMessage().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Message message=dataSnapshot.getValue(Message.class);
+                Message message = dataSnapshot.getValue(Message.class);
 
-                if(message.getContext().length()>40)
+                if (message.getType() == 1)
                 {
-                    String s=message.getContext().substring(0,30);
-                    s=s.concat("...");
-                    viewHolder.tvContext.setText(s);
-
+                    viewHolder.tvContext.setText("Bạn đã gửi một hình ảnh");
                 }
                 else
-                {
-                    viewHolder.tvContext.setText(message.getContext().toString());
+                    {
+                    if (message.getContext().length() > 40) {
+                        String s = message.getContext().substring(0, 30);
+                        s = s.concat("...");
+                        viewHolder.tvContext.setText(s);
+
+                    } else
+                        {
+                        viewHolder.tvContext.setText(message.getContext().toString());
+                    }
                 }
             }
 
