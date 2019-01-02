@@ -17,6 +17,7 @@ import com.example.ngothihuyen.chattok.Model.Team;
 import com.example.ngothihuyen.chattok.Model.User;
 import com.example.ngothihuyen.chattok.Presentation.ContactPresenter;
 import com.example.ngothihuyen.chattok.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,6 +33,8 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
     private AdapterMemberTeam adapterMemberTeam;
     private Button btCreateGroup;
     private EditText nameGroup;
+    private FirebaseAuth auth=FirebaseAuth.getInstance();
+    private  String userID=auth.getCurrentUser().getUid();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
@@ -75,14 +78,11 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
         databaseReference.child(converID).setValue(conversations);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Team");
-        Team team = new Team(converID);
-        String teamID = databaseReference.push().getKey();
-        databaseReference.child(teamID).setValue(team);
+        Team team = new Team(userID);
+        String key=databaseReference.child(converID).push().getKey();
+        databaseReference.child(converID).child(key).setValue(team);
 
-        Map<String,String> member=new HashMap<>();
-        member.put("User1","AHIHI");
-        member.put("User2","hi");
-        databaseReference.child(teamID).child("people").setValue(member);
+
     }
 
 

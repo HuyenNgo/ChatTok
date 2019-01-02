@@ -36,8 +36,8 @@ public class ConversationPresenter implements IConversationPresenter  {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Participant participant=new Participant();
-                    participant = data.getValue(Participant.class);
+
+                    Participant  participant = data.getValue(Participant.class);
                     IConversation.getListParticipant(participant);
 
                 }

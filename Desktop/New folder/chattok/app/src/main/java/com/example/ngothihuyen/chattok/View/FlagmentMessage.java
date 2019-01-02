@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import com.example.ngothihuyen.chattok.AdapterView.AdapterConversation;
 import com.example.ngothihuyen.chattok.Model.Conversations;
 import com.example.ngothihuyen.chattok.Model.Participant;
+import com.example.ngothihuyen.chattok.Model.Team;
 import com.example.ngothihuyen.chattok.Presentation.ConversationPresenter;
+import com.example.ngothihuyen.chattok.Presentation.TeamPresenter;
 import com.example.ngothihuyen.chattok.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,14 +26,15 @@ import java.util.ArrayList;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
-public class FlagmentMessage extends Fragment implements IConversationView{
+public class FlagmentMessage extends Fragment implements IConversationView,ITeamView {
 
          private RecyclerView recyclerView;
          private AdapterConversation adapterConversation;
          private ArrayList<Conversations>  listConver=new ArrayList<>();
          private FirebaseAuth Auth=FirebaseAuth.getInstance();
          private  String UserID=Auth.getCurrentUser().getUid();
-    private ArrayList<Participant>  listPart=new ArrayList<>();
+         private  ArrayList<Team> listTeam=new ArrayList<>();
+         private ArrayList<Participant>  listPart=new ArrayList<>();
 
 
     @Nullable
@@ -52,13 +55,14 @@ public class FlagmentMessage extends Fragment implements IConversationView{
 
         adapterConversation=new AdapterConversation(getContext(),listConver);
          recyclerView.setAdapter(adapterConversation);
-
         listPart.clear();
         listConver.clear();
-
+        listTeam.clear();
         ConversationPresenter conversationPresenter=new ConversationPresenter();
         conversationPresenter.getParticipant(this);
         conversationPresenter.getConversation(this);
+        TeamPresenter teamPresenter=new TeamPresenter();
+        teamPresenter.getTeam(this);
 
     }
 
@@ -71,22 +75,37 @@ public class FlagmentMessage extends Fragment implements IConversationView{
             adapterConversation.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public void getlistTeam(Team team)
+    {
+        listTeam.add(team);
+    }
+
     @Override
     public void getListConverSation(Conversations conversations) {
 
-         for(int i=0;i<listPart.size();i++) {
+         for(int i=0;i<listPart.size();i++)
+         {
              Participant participant=listPart.get(i);
 
              if(conversations.get_conversationKey().compareTo(participant.getRoomID())==0)
 
              {
                  listConver.add(conversations);
-
-
              }
-             adapterConversation.notifyDataSetChanged();
 
          }
+
+         for(int i=0;i<listTeam.size();i++)
+         {
+             Team team=listTeam.get(i);
+             if(conversations.get_conversationKey().equals(team.getTeamID()))
+             {
+                 listConver.add(conversations);
+             }
+         }
+        adapterConversation.notifyDataSetChanged();
     }
     }
 

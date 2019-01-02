@@ -40,6 +40,8 @@ public class FlagmentTeam extends Fragment implements ITeamView{
         gridLayoutManager.setOrientation(orientation);
         listTeam.setLayoutManager(gridLayoutManager);
 
+        TeamPresenter teamPresenter=new TeamPresenter();
+        teamPresenter.getTeam(this);
 
 
         DisplayTeam();
@@ -61,9 +63,6 @@ public class FlagmentTeam extends Fragment implements ITeamView{
 
     public  void DisplayTeam()
      {
-         TeamPresenter teamPresenter=new TeamPresenter();
-         teamPresenter.getTeam(this);
-
          adapterTeam=new AdapterTeam(getContext(),lsTeam);
          listTeam.setAdapter(adapterTeam);
         lsTeam.clear();
@@ -73,7 +72,6 @@ public class FlagmentTeam extends Fragment implements ITeamView{
     @Override
     public void getlistTeam(Team team) {
         lsTeam.add(team);
-
         adapterTeam.notifyDataSetChanged();
     }
 }

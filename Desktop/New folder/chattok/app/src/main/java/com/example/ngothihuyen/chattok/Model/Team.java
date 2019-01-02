@@ -5,43 +5,30 @@ import java.util.List;
 
 public class Team {
 
-    private  String idTeam;
-    private  long   member;
-    private String roomID;
+    private  String userID;
+    private  String teamID;
 public  Team()
 {
 
 }
 
-
-    public  Team(String RoomID)
-    {
-        this.member=3;
-        this.roomID=RoomID;
+public Team (String userID)
+{
+    this.userID=userID;
+}
+    public String getUserID() {
+        return userID;
     }
 
-
-    public String getIdTeam() {
-        return idTeam;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
-    public void setIdTeam(String idTeam) {
-        this.idTeam = idTeam;
+    public String getTeamID() {
+        return teamID;
     }
 
-    public long getMember() {
-        return member;
-    }
-
-    public void setMember(long member) {
-        this.member = member;
-    }
-
-    public String getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
+    public void setTeamID(String teamID) {
+        this.teamID = teamID;
     }
 }

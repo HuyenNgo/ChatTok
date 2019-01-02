@@ -132,12 +132,22 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
 
 
         Bundle b = getIntent().getExtras();
-        MyParcelable obj = (MyParcelable) b. getParcelable("Conversation");
-        ConverID=obj.getmData().toString();
-        MyParcelable obj2=(MyParcelable)b.getParcelable("User_ID");
-        nameUserSend=obj2.getmData().toString();
-        nameUser.setText(nameUserSend);
+        MyParcelable flag1 = (MyParcelable) b. getParcelable("flag");
+        String flag2 =flag1.getmData().toString();
+        if(flag2.equals("1")) {
+            MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
+            ConverID = obj.getmData().toString();
+            MyParcelable obj2 = (MyParcelable) b.getParcelable("User_ID");
+            nameUserSend = obj2.getmData().toString();
+            nameUser.setText(nameUserSend);
+        }
+        else {
+            MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
+            ConverID = obj.getmData().toString();
+            MyParcelable ob2=(MyParcelable)b.getParcelable("nameTeam");
 
+            nameUser.setText(ob2.getmData().toString());
+        }
 
          DisplayMessage();
     }
@@ -211,9 +221,10 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful())
                     {
-                        pd.dismiss();
+
                         Uri downloadUri=task.getResult();
                         String mUri=downloadUri.toString();
+                        pd.dismiss();
                         createMessageImage(mUri,Auth.getCurrentUser().getUid().toString());
 
                     }

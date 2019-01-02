@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity {
     private EditText editpass;
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference=firebaseDatabase.getReference("Users");
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -91,7 +91,8 @@ public class Login extends AppCompatActivity {
                     }
                     else
                     {
-                            databaseReference.child(auth.getCurrentUser().getUid()).child("isOnline").setValue("online");
+                       databaseReference= firebaseDatabase.getReference("Users").child(auth.getCurrentUser().getUid());
+                            databaseReference.child("isOnline").setValue("online");
                         Intent intent=new Intent(Login.this,HomeActivity.class);
                         startActivity(intent);
                         finish();

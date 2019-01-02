@@ -7,12 +7,42 @@
     android:orientation="vertical"
     android:background="#cfdef7"
     >
+  <android.support.design.widget.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#fff"
+      android:id="@+id/bar_layout">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <ImageButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/image_back"
+          android:layout_marginRight="13dp"
+          android:background="@drawable/ic_back"/>
+      <TextView
+          android:id="@+id/tvSearch"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Tìm kiếm bạn bè"/>
+      <ImageButton
+          android:id="@+id/imageAđFriend"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="180dp"
+          android:background="@drawable/ic_addfriend"
+
+          />
+    </android.support.v7.widget.Toolbar>
+  </android.support.design.widget.AppBarLayout>
 
 
   <ListView
+      android:id="@+id/lv_user"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/lv_user">
+     >
 
   </ListView>
 

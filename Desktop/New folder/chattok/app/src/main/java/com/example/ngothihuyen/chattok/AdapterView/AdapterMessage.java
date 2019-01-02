@@ -64,53 +64,54 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.ViewHold
              }
         }
         else
-        {
-             if(flag==0) {
-                 View view = LayoutInflater.from(context).inflate(R.layout.layout_item_left, viewGroup, false);
-                 return new AdapterMessage.ViewHolder(view);
-             }
-             else {
-                 View view = LayoutInflater.from(context).inflate(R.layout.layout_imageleft, viewGroup, false);
-                 return new AdapterMessage.ViewHolder(view);
-             }
-        }
+            {
+                if (flag == 0)
+                {
+                    View view = LayoutInflater.from(context).inflate(R.layout.layout_item_left, viewGroup, false);
+                    return new AdapterMessage.ViewHolder(view);
+                }
+                else
+                    {
+                    View view = LayoutInflater.from(context).inflate(R.layout.layout_imageleft, viewGroup, false);
+                    return new AdapterMessage.ViewHolder(view);
+                }
+            }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterMessage.ViewHolder viewHolder, int position) {
 
-       if(position < arrMessage.size()) {
-           Message message = arrMessage.get(position);
-           if (arrMessage.get(position).getType() == 0)
-               flag = 0;
-           else flag = 1;
-           data = firebaseDatabase.getReference("Users").child(message.getuser_id());
+if(position<arrMessage.size()) {
+    Message message = arrMessage.get(position);
 
-           data.addListenerForSingleValueEvent(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   User user = dataSnapshot.getValue(User.class);
-                   if (user.getAvatar().equals("default")) {
-                       viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
-                   } else
-                       Glide.with(context).load(user.getAvatar()).into(viewHolder.imageView);
-               }
+    data = firebaseDatabase.getReference("Users").child(message.getuser_id());
 
-               @Override
-               public void onCancelled(@NonNull DatabaseError databaseError) {
+    data.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            User user = dataSnapshot.getValue(User.class);
+            if (user.getAvatar().equals("default")) {
+                viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
+            } else
+                Glide.with(context).load(user.getAvatar()).into(viewHolder.imageView);
+        }
 
-               }
-           });
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-           if (flag == 0) {
-               viewHolder.tvContext.setText(message.getContext());
-           }
-           else if (flag == 1) {
-               Glide.with(context).load(message.getContext()).into(viewHolder.imageSent);
+        }
+    });
 
-           }
-           //viewHolder.tvTime.setText(android.text.format.DateFormat.format("(HH:mm:ss))",message.getTime()));
-       }
+    if (flag == 0) {
+        viewHolder.tvContext.setText(message.getContext());
+    } else if (flag == 1) {
+        Glide.with(context).load(message.getContext()).into(viewHolder.imageSent);
+
+    }
+    //viewHolder.tvTime.setText(android.text.format.DateFormat.format("(HH:mm:ss))",message.getTime()));
+    flag = 0;
+}
     }
 
     @Override

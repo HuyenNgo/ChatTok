@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.text.TextUtils;
 
+import com.example.ngothihuyen.chattok.Model.Friends;
 import com.example.ngothihuyen.chattok.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -80,8 +81,6 @@ public  class sign_in extends AppCompatActivity  {
     //Them User vao realtime Database
     private void createInforUser(String UserID,String displayName,String Email) {
         User User=new User(displayName,Email);
-        Toast toast=Toast.makeText(sign_in.this,UserID,   Toast.LENGTH_SHORT);
-        toast.show();
         mDatabase.child(UserID).setValue(User);
         addUserChangeListener();
 
@@ -91,17 +90,17 @@ public  class sign_in extends AppCompatActivity  {
         mDatabase.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User User=dataSnapshot.getValue(com.example.ngothihuyen.chattok.Model.User.class);
-                if (User == null) {
-                    Log.e(TAG, "User data is null!");
+                User user=dataSnapshot.getValue(com.example.ngothihuyen.chattok.Model.User.class);
+                if (user == null)
+                {
                     return;
                 }
-                Log.e(TAG, "User data is changed!" +User.displayname + ", " + User.email);
 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
 
             }
         });
@@ -145,7 +144,9 @@ public  class sign_in extends AppCompatActivity  {
 
                     Toast toast=Toast.makeText(sign_in.this,"Đăng ký thành công",Toast.LENGTH_SHORT);
                     toast.show();
-                   createInforUser(userID,name,Email);
+                    createInforUser(userID,name,Email);
+
+                    createFriends(userID);
                     Intent intent=new Intent(sign_in.this,HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -153,7 +154,7 @@ public  class sign_in extends AppCompatActivity  {
 
                 }
                 else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+
                     Toast toast=Toast.makeText(sign_in.this,"Đăng ký thất bại",Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -162,6 +163,16 @@ public  class sign_in extends AppCompatActivity  {
 
     }
 
+    private void createFriends(String userID) {
+
+
+        mDatabase=mFirebaseInstance.getReference("Friends");
+
+        Friends friends=new Friends();
+          friends.setUserID(userID);
+
+          mDatabase.child(userID).setValue(friends);
+    }
 
 
 }
