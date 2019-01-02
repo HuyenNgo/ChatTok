@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
-        android:minHeight="?android:attr/actionBarSize">
+        android:minHeight="?android:attr/actionBarSize"
+       >
 
         <RadioGroup
             android:id="@+id/group_radio"
@@ -25,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="fill_vertical"
             android:background="@drawable/custom_toolbar_radiogroup"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <RadioButton
                 android:id="@+id/rdMessage"
