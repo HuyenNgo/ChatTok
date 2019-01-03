@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ngothihuyen.chattok.AdapterView.AdapterMemberTeam;
 import com.example.ngothihuyen.chattok.Model.Conversations;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ScreenCreateGroup extends AppCompatActivity implements IContactView {
@@ -31,12 +33,13 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
     private ArrayList<User> listUser = new ArrayList<>();
     private RecyclerView recyclerView;
     private AdapterMemberTeam adapterMemberTeam;
-    private Button btCreateGroup;
+    private TextView tvTao;
     private EditText nameGroup;
     private FirebaseAuth auth=FirebaseAuth.getInstance();
     private  String userID=auth.getCurrentUser().getUid();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private List<String> listIdUser=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,14 +52,21 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        btCreateGroup = (Button) findViewById(R.id.btCreate);
+        tvTao=(TextView)findViewById(R.id.tvTAO);
         nameGroup = (EditText) findViewById(R.id.editName);
         adapterMemberTeam = new AdapterMemberTeam(getBaseContext(), listUser);
-        //recyclerView.setAdapter(adapterMemberTeam);
+        recyclerView.setAdapter(adapterMemberTeam);
         ContactPresenter contactPresenter = new ContactPresenter();
         contactPresenter.getUser(this);
 
-        btCreateGroup.setOnClickListener(new View.OnClickListener() {
+        adapterMemberTeam.setOnItemClickedListener(new AdapterMemberTeam.OnItemClickedListener() {
+            @Override
+            public void onItemClick(String userID) {
+                listIdUser.add(userID);
+            }
+        });
+
+        tvTao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CreateGroup();
@@ -78,10 +88,13 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
         databaseReference.child(converID).setValue(conversations);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Team");
-        Team team = new Team(userID);
-        String key=databaseReference.child(converID).push().getKey();
-        databaseReference.child(converID).child(key).setValue(team);
 
+        for(int i=0;i<listIdUser.size();i++)
+        {
+            Team team = new Team(listIdUser.get(i).toString());
+            String key = databaseReference.child(converID).push().getKey();
+            databaseReference.child(converID).child(key).setValue(team);
+        }
 
     }
 

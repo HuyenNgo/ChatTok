@@ -141,11 +141,11 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
             nameUserSend = obj2.getmData().toString();
             nameUser.setText(nameUserSend);
         }
-        else {
+        else
+            {
             MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
             ConverID = obj.getmData().toString();
             MyParcelable ob2=(MyParcelable)b.getParcelable("nameTeam");
-
             nameUser.setText(ob2.getmData().toString());
         }
 

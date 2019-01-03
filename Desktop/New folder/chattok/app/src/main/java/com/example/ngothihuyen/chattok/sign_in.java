@@ -31,6 +31,7 @@ public  class sign_in extends AppCompatActivity  {
 
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mDatabase;
+    private DatabaseReference databaseReference;
     protected FirebaseAuth mFirebaseAuth ;
     private static final String TAG="TipCalculatorActivity";
     private EditText editName;
@@ -146,6 +147,9 @@ public  class sign_in extends AppCompatActivity  {
                     toast.show();
                     createInforUser(userID,name,Email);
 
+                    databaseReference= mFirebaseInstance.getReference("Users").child(auth.getCurrentUser().getUid());
+                    databaseReference.child("isOnline").setValue("online");
+
                     createFriends(userID);
                     Intent intent=new Intent(sign_in.this,HomeActivity.class);
                     startActivity(intent);
@@ -168,10 +172,12 @@ public  class sign_in extends AppCompatActivity  {
 
         mDatabase=mFirebaseInstance.getReference("Friends");
 
+
         Friends friends=new Friends();
           friends.setUserID(userID);
+          String key="thanhvien1";
 
-          mDatabase.child(userID).setValue(friends);
+          mDatabase.child(userID).child(key).setValue(friends);
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.ngothihuyen.chattok.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.ngothihuyen.chattok.Model.User;
@@ -29,6 +31,7 @@ public class FlagmentContact extends Fragment implements IContactView {
     private  DatabaseReference data;
 
     private Context context;
+    private ImageButton btAddFriend;
     private ListView lv;
 
     public final  ArrayList<User>listItems  = new ArrayList<User>();
@@ -40,7 +43,15 @@ public class FlagmentContact extends Fragment implements IContactView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_contact,container,false);
         lv=(ListView)view.findViewById(R.id.lv_user);
+        btAddFriend=(ImageButton)view.findViewById(R.id.imageAddFriend);
 
+        btAddFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),ScreenCreateFriend.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

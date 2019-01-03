@@ -102,7 +102,7 @@ public class AdapterContact extends ArrayAdapter<User> implements IParticipant {
                       }
                       MyParcelable obj = new MyParcelable(ConverID.toString());
                       MyParcelable ID_uer = new MyParcelable(contact.getDisplayname().toString());
-                      MyParcelable flag=new MyParcelable("0");
+                      MyParcelable flag=new MyParcelable("1");
                       Bundle b = new Bundle();
                       b.putParcelable("Conversation", obj);
                       b.putParcelable("User_ID", ID_uer);

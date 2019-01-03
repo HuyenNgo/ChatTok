@@ -1,6 +1,5 @@
 package com.example.ngothihuyen.chattok.Presentation;
 
-
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -17,8 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactPresenter implements IContactPresenter {
-
+public class FriendPresenter implements IContactPresenter {
 
 
     private FirebaseDatabase database;
@@ -28,51 +26,59 @@ public class ContactPresenter implements IContactPresenter {
     private List listIdUser= new ArrayList();
     private FirebaseAuth auth=FirebaseAuth.getInstance();
     private String userId=auth.getCurrentUser().getUid();
+    private int flag=0;
 
-    public ContactPresenter(){
+    public FriendPresenter(){
         database=FirebaseDatabase.getInstance();
         databaseReference=database.getReference("Friends").child(userId);
         firebaseDatabase  = FirebaseDatabase.getInstance();
         dataRf =  firebaseDatabase.getReference("Users");
     }
-     public  void GetListIdUser()
-     {
-         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-             @Override
-             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
-                       Friends friends = dataSnapshot1.getValue(Friends.class);
 
-                       listIdUser.add(friends.getUserID().toString());
+    public  void GetListIdUser()
+    {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                    Friends friends = dataSnapshot1.getValue(Friends.class);
 
-                   }
+                    listIdUser.add(friends.getUserID().toString());
 
-             }
+                }
 
-             @Override
-             public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
 
-             }
-         });
-     }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     @Override
     public void getUser(final IContactView usrView) {
+        GetListIdUser();
 
-            GetListIdUser();
         dataRf.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot data : dataSnapshot.getChildren()){
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
                     User _usr = data.getValue(User.class);
-                      _usr.setIduser(data.getKey());
+                    _usr.setIduser(data.getKey());
 
-                      for(int i=0;i<listIdUser.size();i++)
-                      {
-                          if (data.getKey().equals(listIdUser.get(i).toString()))
-                              usrView.getListUser(_usr);
-                      }
 
+                            for (int i = 0; i <listIdUser.size(); i++) {
+                                if ((data.getKey().equals(listIdUser.get(i).toString())))
+                                    flag=1;
+                            }
+                            if(flag==0)
+                            {
+                                usrView.getListUser(_usr);
+
+                            }
+                    flag = 0;
                 }
 
             }

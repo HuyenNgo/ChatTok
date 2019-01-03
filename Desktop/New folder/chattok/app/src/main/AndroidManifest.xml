@@ -29,6 +29,7 @@
         <activity android:name=".View.ScreenReplaceName"></activity>
         <activity android:name=".View.ScreenCreateGroup"></activity>
         <activity android:name=".View.ScreenReplaceProfile"></activity>
+        <activity android:name=".View.ScreenCreateFriend"></activity>
     </application>
 
 </manifest>
