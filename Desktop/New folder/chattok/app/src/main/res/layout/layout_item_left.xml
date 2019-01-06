@@ -18,7 +18,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@+id/tvTime"
-        android:id="@+id/image_user"/>
+        android:id="@+id/image_user" />
 
     <TextView
         android:id="@+id/tvBody"

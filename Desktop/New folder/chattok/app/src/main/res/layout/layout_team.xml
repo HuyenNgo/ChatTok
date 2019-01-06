@@ -4,22 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_all">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:id="@+id/bar_layout">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_back"
+                android:layout_marginRight="13dp"
+                android:background="@drawable/ic_back"/>
+            <EditText
+                android:id="@+id/tvSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Tìm kiếm nhóm"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageGroup"
+                android:background="@drawable/ic_addteam"
+                android:layout_marginLeft="170dp"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space10"
+        android:layout_below="@+id/bar_layout"
         android:id="@+id/recycle_team">
 
 
     </android.support.v7.widget.RecyclerView>
 
-     <de.hdodenhof.circleimageview.CircleImageView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/imageGroup"
-         android:src="@drawable/ic_groudadd"
-         android:background="@color/backgroud_groupadd"
-         android:layout_below="@+id/recycle_team"
-         android:layout_marginTop="20dp"
-         />
+
 </RelativeLayout>

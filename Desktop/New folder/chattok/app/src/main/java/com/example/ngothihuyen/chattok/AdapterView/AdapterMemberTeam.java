@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ngothihuyen.chattok.Model.User;
 import com.example.ngothihuyen.chattok.R;
 
@@ -37,22 +38,26 @@ public class AdapterMemberTeam extends RecyclerView.Adapter<AdapterMemberTeam.Vi
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterMemberTeam.ViewHolder viewHolder, int position) {
-        User User=arruser.get(position);
-        viewHolder.tvName.setText(User.getDisplayname());
+        final User user=arruser.get(position);
+        viewHolder.tvName.setText(user.getDisplayname());
+        if (user.getAvatar().equals("default")) {
+            viewHolder.circleImageView.setImageResource(R.mipmap.ic_launcher);
+        } else
+            Glide.with(context).load(user.getAvatar()).into(viewHolder.circleImageView);
+
 
               viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      if(viewHolder.checkBox.isChecked())
-                      {
-                          viewHolder.checkBox.setChecked(false);
-
-                      }
                       if(!viewHolder.checkBox.isChecked()) {
 
                           viewHolder.checkBox.setChecked(true);
                       }
+                      if(onItemClickedListener!=null)
+                      {
+                          onItemClickedListener.onItemClick(user.getIduser().toString());
                       }
+                  }
               });
 
     }
@@ -76,5 +81,14 @@ public class AdapterMemberTeam extends RecyclerView.Adapter<AdapterMemberTeam.Vi
             circleImageView=view.findViewById(R.id.imageUser);
             checkBox=view.findViewById(R.id.checkbox);
     }
+    }
+    public interface OnItemClickedListener {
+        void onItemClick(String userID);
+    }
+
+    private OnItemClickedListener onItemClickedListener;
+
+    public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
     }
 }

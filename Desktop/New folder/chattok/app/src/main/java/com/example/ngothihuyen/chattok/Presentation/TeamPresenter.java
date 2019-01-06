@@ -55,7 +55,6 @@ public class TeamPresenter implements  ITeamPresenter {
                     if (userID.equals(listMemberTeam.get(i)))
                     {
                         teamView.getlistTeam(team);
-                        Log.d("TeamLoi", team.getTeamID().toString());
                     }
                 }
                 listMemberTeam.clear();

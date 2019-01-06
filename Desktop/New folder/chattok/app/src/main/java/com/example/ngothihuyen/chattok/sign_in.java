@@ -31,6 +31,7 @@ public  class sign_in extends AppCompatActivity  {
 
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mDatabase;
+    private DatabaseReference databaseReference;
     protected FirebaseAuth mFirebaseAuth ;
     private static final String TAG="TipCalculatorActivity";
     private EditText editName;
@@ -49,7 +50,6 @@ public  class sign_in extends AppCompatActivity  {
 
         mFirebaseAuth= FirebaseAuth.getInstance();
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mDatabase = mFirebaseInstance.getReference("Users");
         editMail=(EditText)findViewById(R.id.email_id);
         editName=(EditText)findViewById(R.id.displayname_id);
         editPass=(EditText)findViewById(R.id.password_id);
@@ -80,8 +80,10 @@ public  class sign_in extends AppCompatActivity  {
 
     //Them User vao realtime Database
     private void createInforUser(String UserID,String displayName,String Email) {
-        User User=new User(displayName,Email);
-        mDatabase.child(UserID).setValue(User);
+
+        User user=new User(displayName,Email);
+        mDatabase=FirebaseDatabase.getInstance().getReference("Users");
+        mDatabase.child(UserID).setValue(user);
         addUserChangeListener();
 
     }
@@ -146,10 +148,10 @@ public  class sign_in extends AppCompatActivity  {
                     toast.show();
                     createInforUser(userID,name,Email);
 
+                    databaseReference= mFirebaseInstance.getReference("Users").child(userID);
+                    databaseReference.child("isOnline").setValue("online");
+
                     createFriends(userID);
-                    Intent intent=new Intent(sign_in.this,HomeActivity.class);
-                    startActivity(intent);
-                    finish();
 
 
                 }
@@ -168,11 +170,17 @@ public  class sign_in extends AppCompatActivity  {
 
         mDatabase=mFirebaseInstance.getReference("Friends");
 
-        Friends friends=new Friends();
-          friends.setUserID(userID);
-          String key = "thanhvien1";
 
+          Friends friends=new Friends();
+          friends.setUserID(userID);
+
+          String key="thanhvien1";
           mDatabase.child(userID).child(key).setValue(friends);
+
+        Intent intent=new Intent(sign_in.this,HomeActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/backgroud_groupadd">
+   >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -34,7 +34,7 @@
            android:layout_toRightOf="@+id/tvNameUser"
            android:layout_alignParentBottom="true"
            android:layout_marginLeft="50dp"
-
-           android:layout_marginRight="5dp"/>
+           android:layout_marginRight="5dp"
+           android:background="@color/colorBlack"/>
     </RelativeLayout>
 </LinearLayout>

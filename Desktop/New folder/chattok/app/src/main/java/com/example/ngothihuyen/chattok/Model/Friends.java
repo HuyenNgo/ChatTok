@@ -8,7 +8,10 @@ public class Friends {
             {
                 this.userID="A";
             }
-
+     public Friends(String userID)
+     {
+         this.userID=userID;
+     }
     public String getUserID() {
         return userID;
     }

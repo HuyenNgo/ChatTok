@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lv_itemfriend"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imageUser"
+            />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNameFriend"
+            android:layout_toRightOf="@+id/imageUser"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:text="hello"
+            android:textColor="#000"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friend"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+           android:layout_marginLeft="160dp"
+            android:layout_marginTop="18dp"
+            android:visibility="gone"
+            android:background="@drawable/ic_friend"
+           />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/NoFriend"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/ic_addfriend"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>

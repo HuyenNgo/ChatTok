@@ -63,6 +63,7 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
     private ImageButton btSend;
     private ImageButton btSendImage;
     private ImageButton btSendIcon;
+    private ImageButton btback;
     private Toolbar toolbar;
     private TextView userName;
     private EmojiconEditText edtInput;
@@ -90,9 +91,10 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getBaseContext());
         linearLayoutManager.setStackFromEnd(true);
         listMessage.setLayoutManager(linearLayoutManager);
-        listMessage.setItemAnimator(new DefaultItemAnimator());
+        listMessage.setHasFixedSize(true);
 
         btSend=(ImageButton) findViewById(R.id.bt_send);
+        btback=(ImageButton) findViewById(R.id.image_back);
         edtInput=(EmojiconEditText) findViewById(R.id.input);
         nameUser=(TextView)findViewById(R.id.name_user);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
@@ -109,6 +111,23 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
         storageReference = storage.getReference("uploads");
 
        // userName=(TextView)findViewById(R.id.username);
+        Bundle b = getIntent().getExtras();
+        MyParcelable flag1 = (MyParcelable) b. getParcelable("flag");
+        String flag2 =flag1.getmData().toString();
+        if(flag2.equals("1")) {
+            MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
+            ConverID = obj.getmData().toString();
+            MyParcelable obj2 = (MyParcelable) b.getParcelable("User_ID");
+            nameUserSend = obj2.getmData().toString();
+            nameUser.setText(nameUserSend);
+        }
+        else
+            {
+            MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
+            ConverID = obj.getmData().toString();
+            MyParcelable ob2=(MyParcelable)b.getParcelable("nameTeam");
+            nameUser.setText(ob2.getmData().toString());
+        }
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,25 +149,14 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
             }
         });
 
-
-        Bundle b = getIntent().getExtras();
-        MyParcelable flag1 = (MyParcelable) b. getParcelable("flag");
-        String flag2 =flag1.getmData().toString();
-        if(flag2.equals("1")) {
-            MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
-            ConverID = obj.getmData().toString();
-            MyParcelable obj2 = (MyParcelable) b.getParcelable("User_ID");
-            nameUserSend = obj2.getmData().toString();
-            nameUser.setText(nameUserSend);
-        }
-        else {
-            MyParcelable obj = (MyParcelable) b.getParcelable("Conversation");
-            ConverID = obj.getmData().toString();
-            MyParcelable ob2=(MyParcelable)b.getParcelable("nameTeam");
-
-            nameUser.setText(ob2.getmData().toString());
-        }
-
+        btback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),FlagmentMessage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
          DisplayMessage();
     }
 
@@ -188,7 +196,7 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
             }
             else {
                 uploadImage();
-                DisplayMessage();
+
 
             }
         }
@@ -281,7 +289,6 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
              listMessage.scrollToPosition(listItems.size()-1);
              listItems.clear();
              chatPresenter.getMessage(this);
-
 
        }
 
