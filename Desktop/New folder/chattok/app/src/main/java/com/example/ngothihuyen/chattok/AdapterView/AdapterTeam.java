@@ -64,6 +64,7 @@ public class AdapterTeam  extends  RecyclerView.Adapter<AdapterTeam.ViewHolder>{
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Conversations conversations = dataSnapshot.getValue(Conversations.class);
                         nameTeam=conversations.getname().toString();
+                        Log.d("Name", conversations.getname().toString());
                         viewHolder.tvNameTeam.setText(conversations.getname().toString());
                     }
 
@@ -73,22 +74,24 @@ public class AdapterTeam  extends  RecyclerView.Adapter<AdapterTeam.ViewHolder>{
                     }
                 });
 
+                 viewHolder.imageTeam.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         MyParcelable obj = new MyParcelable(team.getTeamID().toString());
+                         MyParcelable name = new MyParcelable(viewHolder.tvNameTeam.getText().toString());
+                         MyParcelable flag=new MyParcelable("0");
+                         Bundle b = new Bundle();
+                         b.putParcelable("Conversation", obj);
+                         b.putParcelable("flag",flag);
+                         b.putParcelable("nameTeam",name);
+                         Intent intent = new Intent(context, FlagmentChat.class);
+                         intent.putExtras(b);
+                         context.startActivity(intent);
 
-                viewHolder.imageTeam.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MyParcelable obj = new MyParcelable(team.getTeamID().toString());
-                        MyParcelable name = new MyParcelable(nameTeam.toString());
-                        MyParcelable flag=new MyParcelable("0");
-                        Bundle b = new Bundle();
-                        b.putParcelable("Conversation", obj);
-                        b.putParcelable("flag",flag);
-                        b.putParcelable("nameTeam",name);
-                        Intent intent = new Intent(context, FlagmentChat.class);
-                        intent.putExtras(b);
-                        context.startActivity(intent);
-                    }
-                });
+                     }
+                 });
+
+
             }
     }
 
@@ -97,18 +100,28 @@ public class AdapterTeam  extends  RecyclerView.Adapter<AdapterTeam.ViewHolder>{
         return arrTeam.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+
         CircleImageView imageTeam;
         TextView tvNameTeam;
-       public  ViewHolder(View view)
-       {
-           super(view);
 
-           tvNameTeam=view.findViewById(R.id.tvNameTeam);
-           imageTeam=view.findViewById(R.id.imTeam);
-       }
+        public ViewHolder(View view) {
+            super(view);
+
+            tvNameTeam = view.findViewById(R.id.tvNameTeam);
+            imageTeam = view.findViewById(R.id.imTeam);
+        }
 
     }
 
+    public interface OnItemClickedListener {
+        void onItemClick(String userID);
+    }
+
+    private AdapterMemberTeam.OnItemClickedListener onItemClickedListener;
+
+    public void setOnItemClickedListener(AdapterMemberTeam.OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
+    }
 }

@@ -56,6 +56,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, sign_in.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -92,7 +93,7 @@ public class Login extends AppCompatActivity {
                     else
                     {
                        databaseReference= firebaseDatabase.getReference("Users").child(auth.getCurrentUser().getUid());
-                            databaseReference.child("isOnline").setValue("online");
+                       databaseReference.child("isOnline").setValue("online");
                         Intent intent=new Intent(Login.this,HomeActivity.class);
                         startActivity(intent);
                         finish();

@@ -1,5 +1,6 @@
 package com.example.ngothihuyen.chattok.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.example.ngothihuyen.chattok.AdapterView.AdapterMemberTeam;
 import com.example.ngothihuyen.chattok.Model.Conversations;
 import com.example.ngothihuyen.chattok.Model.Team;
 import com.example.ngothihuyen.chattok.Model.User;
+import com.example.ngothihuyen.chattok.MyParcelable;
 import com.example.ngothihuyen.chattok.Presentation.ContactPresenter;
 import com.example.ngothihuyen.chattok.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,6 +72,7 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
             @Override
             public void onClick(View v) {
                 CreateGroup();
+
             }
         });
 
@@ -95,7 +98,21 @@ public class ScreenCreateGroup extends AppCompatActivity implements IContactView
             String key = databaseReference.child(converID).push().getKey();
             databaseReference.child(converID).child(key).setValue(team);
         }
+        Team team=new Team(userID);
+        String key = databaseReference.child(converID).push().getKey();
+        databaseReference.child(converID).child(key).setValue(team);
 
+        MyParcelable obj = new MyParcelable(converID);
+        MyParcelable name = new MyParcelable(nameGroup.getText().toString());
+        MyParcelable flag=new MyParcelable("0");
+        Bundle b = new Bundle();
+        b.putParcelable("Conversation", obj);
+        b.putParcelable("flag",flag);
+        b.putParcelable("nameTeam",name);
+        Intent intent = new Intent(this, FlagmentChat.class);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
     }
 
 

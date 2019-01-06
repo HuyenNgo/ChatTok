@@ -29,21 +29,21 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/friend"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
            android:layout_marginLeft="160dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="18dp"
             android:visibility="gone"
-            android:src="@drawable/ic_friend"
+            android:background="@drawable/ic_friend"
            />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/NoFriend"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="160dp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_addfriend"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/ic_addfriend"
             android:visibility="gone" />
     </RelativeLayout>
 </LinearLayout>

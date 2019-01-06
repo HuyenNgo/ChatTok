@@ -89,7 +89,7 @@ public class FlagmentProfile extends AppCompatActivity {
                  @Override
                  public void onClick(View v) {
 
-                     databaseReference.child(UserID).child("isOnline").setValue("offline");
+                     databaseReference.child("isOnline").setValue("offline");
                      Auth.getInstance().signOut();
                      Intent intent=new Intent(getApplicationContext(),Login.class);
                      startActivity(intent);
