@@ -16,4 +16,5 @@
     <string name="assignlogin">Bạn đã có tài khoản? </string>
     <string name="displayname">Tên hiển thị</string>
     <string name="signup">Đăng Ký</string>
+    <string name="email">Email</string>
 </resources>

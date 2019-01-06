@@ -173,6 +173,7 @@ public  class sign_in extends AppCompatActivity  {
 
           Friends friends=new Friends();
           friends.setUserID(userID);
+
           String key="thanhvien1";
           mDatabase.child(userID).child(key).setValue(friends);
 
