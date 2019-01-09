@@ -21,6 +21,7 @@ public class AdapterViewHome extends  FragmentStatePagerAdapter{
      FlagmentContact flagContact;
     FlagmentMessage flagmentMessage;
     FlagmentTeam flagTeam;
+    FlagmentProfile flagProfile;
 
     public  AdapterViewHome( FragmentManager fm)
     {
@@ -31,10 +32,11 @@ public class AdapterViewHome extends  FragmentStatePagerAdapter{
         flagContact = new FlagmentContact();
         flagmentMessage =new FlagmentMessage();
         flagTeam= new FlagmentTeam();
-
+        flagProfile=new FlagmentProfile();
         list.add(flagmentMessage);
         list.add(flagContact);
         list.add(flagTeam);
+        list.add(flagProfile);
 
 
     }

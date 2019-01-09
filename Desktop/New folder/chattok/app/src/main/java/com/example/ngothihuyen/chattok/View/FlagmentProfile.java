@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,96 +31,95 @@ import com.google.firebase.storage.StorageReference;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class FlagmentProfile extends AppCompatActivity {
+public class FlagmentProfile  extends Fragment {
     private ChildEventListener mChildEventListener;
-    private Button  btReplaceName;
-    private Button  btLogout;
+    private Button btReplaceName;
+    private Button btLogout;
     private Button btReplaceProfile;
     private TextView tvName;
     private ImageButton imageBack;
     private CircleImageView circleImageView;
-    private  FirebaseAuth Auth;
+    private FirebaseAuth Auth;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference;;
-    private FirebaseAuth auth=FirebaseAuth.getInstance();
-    private String UserID=auth.getCurrentUser().getUid();
-    private  String avatarUser;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference;
+    ;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private String UserID = auth.getCurrentUser().getUid();
+    private String avatarUser;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        setContentView(R.layout.layout_profile);
 
-        btLogout=findViewById(R.id.btLogout);
-        btReplaceName=findViewById(R.id.btReplaceName);
-        btReplaceProfile=findViewById(R.id.btReplaceProfile);
-        tvName=findViewById(R.id.tvName);
-        imageBack=findViewById(R.id.image_back);
-        circleImageView=findViewById(R.id.image_user);
-            databaseReference=firebaseDatabase.getReference("Users").child(UserID);
+        View view = inflater.inflate(R.layout.layout_profile, container, false);
 
-               databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       User user=dataSnapshot.getValue(User.class);
-                       tvName.setText(user.getDisplayname().toString());
-                       if(user.getAvatar().equals("default"))
-                       {
-                           circleImageView.setImageResource(R.mipmap.ic_launcher);
-                       }
-                       else
-                           Glide.with(getBaseContext()).load(user.getAvatar()).into(circleImageView);
-                   }
+        btLogout = view.findViewById(R.id.btLogout);
+        btReplaceName = view.findViewById(R.id.btReplaceName);
+        btReplaceProfile = view.findViewById(R.id.btReplaceProfile);
+        tvName = view.findViewById(R.id.tvName);
+        imageBack = view.findViewById(R.id.image_back);
+        circleImageView = view.findViewById(R.id.image_user);
+        databaseReference = firebaseDatabase.getReference("Users").child(UserID);
 
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                tvName.setText(user.getDisplayname().toString());
+                if (user.getAvatar().equals("default")) {
+                    circleImageView.setImageResource(R.mipmap.ic_launcher);
+                } else
+                    Glide.with(getActivity()).load(user.getAvatar()).into(circleImageView);
+            }
 
-                   }
-               });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+                Intent intent = new Intent(getContext(), HomeActivity.class);
                 startActivity(intent);
             }
         });
-             btLogout.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
+        btLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                     databaseReference.child("isOnline").setValue("offline");
-                     Auth.getInstance().signOut();
-                     Intent intent=new Intent(getApplicationContext(),Login.class);
-                     startActivity(intent);
-                     finish();
+                databaseReference.child("isOnline").setValue("offline");
+                Auth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), Login.class);
+                startActivity(intent);
 
-                 }
-             });
+            }
+        });
 
-             btReplaceName.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     Intent intent=new Intent(getBaseContext(),ScreenReplaceName.class);
-                     startActivity(intent);
-                 }
-             });
-
-
-             btReplaceProfile.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     Intent intent=new Intent(getBaseContext(), ScreenReplaceProfile.class);
-                     startActivity(intent);
+        btReplaceName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ScreenReplaceName.class);
+                startActivity(intent);
+            }
+        });
 
 
-                 }
-             });
+        btReplaceProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ScreenReplaceProfile.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        return view;
+
     }
-
-
-
 }

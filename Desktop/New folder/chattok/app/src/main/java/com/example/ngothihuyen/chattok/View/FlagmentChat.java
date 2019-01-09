@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.example.ngothihuyen.chattok.AdapterView.AdapterMessage;
+import com.example.ngothihuyen.chattok.HomeActivity;
 import com.example.ngothihuyen.chattok.Model.Message;
 import com.example.ngothihuyen.chattok.MyParcelable;
 import com.example.ngothihuyen.chattok.Presentation.ChatPresenter;
@@ -152,7 +153,7 @@ public class FlagmentChat extends AppCompatActivity  implements IChatView{
         btback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getBaseContext(),FlagmentMessage.class);
+                Intent intent=new Intent(getBaseContext(),HomeActivity.class);
                 startActivity(intent);
                 finish();
             }

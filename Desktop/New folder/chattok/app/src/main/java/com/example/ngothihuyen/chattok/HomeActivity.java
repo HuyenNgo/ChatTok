@@ -1,8 +1,10 @@
 package com.example.ngothihuyen.chattok;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +27,7 @@ public class HomeActivity extends AppCompatActivity implements ViewPager.OnPageC
     RadioButton rdTeam;
     RadioButton rdProfile;
     RadioGroup group;
-     ImageButton imageButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +38,10 @@ public class HomeActivity extends AppCompatActivity implements ViewPager.OnPageC
         rdContact=(RadioButton)findViewById(R.id.rdContact);
         rdMessage=(RadioButton)findViewById(R.id.rdMessage);
         rdTeam=(RadioButton)findViewById(R.id.rdTeam);
-
+        rdProfile=(RadioButton) findViewById(R.id.rdProfile);
 
         group=(RadioGroup)findViewById(R.id.group_radio);
-        imageButton=(ImageButton)findViewById(R.id.imageUser);
+
         viewPagerHome = findViewById(R.id.viewpager_home);
 
         adapterViewPagerHome = new AdapterViewHome(getSupportFragmentManager());
@@ -50,13 +52,11 @@ public class HomeActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         group.setOnCheckedChangeListener(this);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),FlagmentProfile.class);
-                startActivity(intent);
-            }
-        });
+
+        rdMessage.setButtonDrawable( R.drawable.message_active_24px);
+        rdContact.setButtonDrawable( R.drawable.friend_24);
+        rdTeam.setButtonDrawable( R.drawable.group_24);
+        rdProfile.setButtonDrawable(R.drawable.setting_24);
     }
 
     @Override
@@ -67,16 +67,27 @@ public class HomeActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
 
+        rdMessage.setButtonDrawable( R.drawable.message_24px);
+        rdContact.setButtonDrawable( R.drawable.friend_24);
+        rdTeam.setButtonDrawable( R.drawable.group_24);
+        rdProfile.setButtonDrawable(R.drawable.setting_24);
        switch (position) {
             case 0:
                 rdMessage.setChecked(true);
+                rdMessage.setButtonDrawable( R.drawable.message_active_24px);
                 break;
             case 1:
                 rdContact.setChecked(true);
-                   break;
+                rdContact.setButtonDrawable( R.drawable.friend_active_24);
+                break;
             case 2:
                 rdTeam.setChecked(true);
+                rdTeam.setButtonDrawable( R.drawable.group_active_24);
                 break;
+           case 3:
+               rdProfile.setChecked(true);
+               rdProfile.setButtonDrawable(R.drawable.setting_active_24);
+               break;
 
         }
 
@@ -98,6 +109,9 @@ public class HomeActivity extends AppCompatActivity implements ViewPager.OnPageC
                 break;
             case R.id.rdTeam:
                 viewPagerHome.setCurrentItem(2);
+                break;
+            case R.id.rdProfile:
+                viewPagerHome.setCurrentItem(3);
                 break;
 
         }

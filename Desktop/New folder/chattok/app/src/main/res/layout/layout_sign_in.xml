@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundlogin">
+    android:background="@drawable/bgchat">
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/colorAccent"
-                    android:drawableLeft="@drawable/ic_action_name"
+                    android:drawableLeft="@drawable/user_24px"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="@string/displayname"
@@ -41,12 +41,12 @@
                     android:textColorHint="@android:color/background_light" />
         <EditText
             android:id="@+id/email_id"
-            android:hint="email"
+            android:hint="@string/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/colorAccent"
-            android:drawableLeft="@drawable/ic_perm_identity_white_24dp"
+            android:drawableLeft="@drawable/envelope_24px"
             android:drawablePadding="10dp"
             android:ems="10"
             android:inputType="textEmailAddress"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/colorAccent"
-            android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+            android:drawableLeft="@drawable/lock_24px"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="@string/password"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/loginback"
                     android:textAlignment="center"
-                    android:textColor="#010ab5"
+                    android:textColor="#FF7D00"
                     />
         </LinearLayout>
 </LinearLayout>

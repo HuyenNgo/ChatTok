@@ -25,7 +25,6 @@
         <activity android:name=".View.FlagmentScreem"></activity>
         <activity android:name=".HomeActivity"></activity>
          <activity android:name=".View.FlagmentChat"></activity>
-        <activity android:name=".View.FlagmentProfile"></activity>
         <activity android:name=".View.ScreenReplaceName"></activity>
         <activity android:name=".View.ScreenCreateGroup"></activity>
         <activity android:name=".View.ScreenReplaceProfile"></activity>

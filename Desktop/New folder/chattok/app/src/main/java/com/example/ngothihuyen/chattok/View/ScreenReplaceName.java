@@ -49,8 +49,8 @@ public class ScreenReplaceName extends AppCompatActivity {
           imageButton.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                  Intent intent = new Intent(getBaseContext(), FlagmentProfile.class);
-                  startActivity(intent);
+                  finish();
+
               }
           });
     }
